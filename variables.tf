@@ -130,6 +130,11 @@ variable "engine_version" {
   default     = "5.6.10a"
 }
 
+variable "engine_mode" {
+  description = "The DB engine mode of the DB cluster, either provisioned , serverless , parallelquery , or global"
+  default     = "provisioned"
+}
+
 variable "replica_scale_enabled" {
   type        = "string"
   default     = false
@@ -182,4 +187,24 @@ variable "performance_insights_kms_key_id" {
   type        = "string"
   default     = ""
   description = "The ARN for the KMS key to encrypt Performance Insights data."
+}
+
+variable "auto_pause" {
+  description = "Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. Defaults to true."
+  default     = "true"
+}
+
+variable "max_capacity" {
+  description = "The maximum capacity. The maximum capacity must be greater than or equal to the minimum capacity. Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256. Defaults to 16."
+  default     = "16"
+}
+
+variable "min_capacity" {
+  description = "The minimum capacity. The minimum capacity must be lesser than or equal to the maximum capacity. Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256. Defaults to 2"
+  default     = "2"
+}
+
+variable "seconds_until_auto_pause" {
+  description = "The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300"
+  default     = "300"
 }

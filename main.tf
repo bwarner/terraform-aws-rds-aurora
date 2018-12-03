@@ -21,6 +21,7 @@ resource "aws_rds_cluster" "this" {
   availability_zones              = ["${var.availability_zones}"]
   engine                          = "${var.engine}"
   engine_version                  = "${var.engine_version}"
+  engine_mode                     = "${var.engine_mode}"
   kms_key_id                      = "${var.kms_key_id}"
   master_username                 = "${var.username}"
   master_password                 = "${local.master_password}"
@@ -36,6 +37,13 @@ resource "aws_rds_cluster" "this" {
   storage_encrypted               = "${var.storage_encrypted}"
   apply_immediately               = "${var.apply_immediately}"
   db_cluster_parameter_group_name = "${var.db_cluster_parameter_group_name}"
+
+  scaling_configuration {
+    auto_pause               = "${var.auto_pause}"
+    max_capacity             = "${var.max_capacity}"
+    min_capacity             = "${var.min_capacity}"
+    seconds_until_auto_pause = "${var.seconds_until_auto_pause}"
+  }
 
   tags = "${var.tags}"
 }
